@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - T.SHOP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background-color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .login-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .login-link:hover {
+            color: #F0C419;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .main-nav {
+            background-color: #222;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #F0C419;
+        }
+
+        /* About Hero Section */
+        .about-hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 48px;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .about-subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* Mission Statements */
+        .mission-statements {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .mission-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .mission-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .mission-icon {
+            font-size: 24px;
+            color: #F0C419;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .mission-content h2 {
+            font-size: 24px;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .mission-content p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Carousel */
+        .carousel-container {
+            max-width: 800px;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-slide {
+            display: flex;
+            width: 500%;
+            height: 400px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide img {
+            width: 20%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            color: #333;
+            border: none;
+            padding: 12px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .carousel-btn.prev { left: 15px; }
+        .carousel-btn.next { right: 15px; }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-indicator.active {
+            background: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #F0C419;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-link {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .facebook-icon::before {
+            content: "\f09a";
+            font-family: "Font Awesome 6 Brands";
+        }
+
+        .twitter-icon::before {
+            content: "\f099";
+            font-family: "Font Awesome 6 Brands";
+        }
+
+        .instagram-icon::before {
+            content: "\f16d";
+            font-family: "Font Awesome 6 Brands";
+        }
+
+        .social-link:hover {
+            color: #F0C419;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 36px;
+            }
+
+            .mission-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .mission-icon {
+                margin-bottom: 20px;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .carousel-container {
+                max-width: 90%;
+                height: 300px;
+            }
+            
+            .carousel-slide {
+                height: 300px;
+            }
+            
+            .carousel-btn {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+        }
+
+        .search-icon::before {
+            content: "\f002";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        .menu-icon::before {
+            content: "\f0c9";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        .target-icon::before {
+            content: "\f05b";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        .star-icon::before {
+            content: "\f005";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        .chart-icon::before {
+            content: "\f201";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="t.shop logo.png" alt="Store Logo">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search products...">
+                <button type="button"><i class="search-icon"></i></button>
+            </div>
+            <div class="header-right">
+                <a href="login.html" class="login-link">Login</a>
+                <button class="mobile-menu-toggle">
+                    <i class="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>About us</h1>
+            <p class="about-subtitle">We're a team of passionate individuals working to revolutionize the way people shop online.</p>
+            
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img src="iphone_about.webp" alt="iphone 15">
+                    <img src="zflip_about.jpeg" alt="samsung Z-flip">
+                    <img src="camera_about.webp" alt="camera">
+                    <img src="headphones_about.jpg" alt="wireless headphones">
+                    <img src="monitor_about.jpg" alt="LG 45 UltraGear OLED curved Gaming Monitor">
+                </div>
+                
+                <button class="carousel-btn prev">&#10094;</button>
+                <button class="carousel-btn next">&#10095;</button>
+                
+                <div class="carousel-nav">
+                    <div class="carousel-indicator active"></div>
+                    <div class="carousel-indicator"></div>
+                    <div class="carousel-indicator"></div>
+                    <div class="carousel-indicator"></div>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Statements -->
+    <section class="mission-statements">
+        <div class="container">
+            <div class="mission-item">
+                <div class="mission-icon">
+                    <i class="target-icon"></i>
+                </div>
+                <div class="mission-content">
+                    <h2>Our Mission</h2>
+                    <p>We aim to eliminate the hassle of searching through multiple stores by bringing all the best deals to one place. Whether you're shopping in Nairobi's Eastleigh, CBD, or beyond, we ensure that you find the best prices without stepping foot outside.</p>
+                </div>
+            </div>
+            <div class="mission-item">
+                <div class="mission-icon">
+                    <i class="star-icon"></i>
+                </div>
+                <div class="mission-content">
+                    <h2>What We Offer</h2>
+                    <p>✔ Compare Prices Instantly – View product prices from multiple retailers in seconds.<br>
+✔ Smart Filtering – Find items within your budget using our price range filters.<br>
+✔ Shop Details & Locations – See store addresses and other details before making a purchase.<br>
+✔ For Businesses – Retailers can register, upload products, and gain more visibility.</p>
+                </div>
+            </div>
+            <div class="mission-item">
+                <div class="mission-icon">
+                    <i class="chart-icon"></i>
+                </div>
+                <div class="mission-content">
+                    <h2>Why Choose Us?</h2>
+                    <p>🔹 Save Time & Money – No need to visit multiple shops—find the best deals instantly.<br>
+🔹 Support Local Businesses – We help small retailers reach more customers.<br>
+🔹 User-Friendly Experience – A clean and intuitive design makes shopping stress-free.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2025 T.SHOP. All rights reserved.
+                </div>
+                <div class="social-icons">
+                    <a href="#" class="social-link facebook">
+                        <i class="facebook-icon"></i>
+                    </a>
+                    <a href="#" class="social-link twitter">
+                        <i class="twitter-icon"></i>
+                    </a>
+                    <a href="#" class="social-link instagram">
+                        <i class="instagram-icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

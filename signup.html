@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Create Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="signup.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .signup-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .signup-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .signup-header h1 {
+            font-size: 24px;
+            color: #333;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #666;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .radio-option input[type="radio"]:checked {
+            border-color: #222;
+        }
+
+        .radio-option input[type="radio"]:checked::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #222;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .radio-option label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 12px 40px;
+            border: none;
+            background: #f8f8f8;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: #f0f0f0;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+
+        .sign-up-btn {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .sign-up-btn:hover {
+            background: orange;
+        }
+
+        .login-prompt {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .login-link {
+            color:orange;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            border: 1px solid #ff4444 !important;
+            background: #fff8f8 !important;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-card">
+        <div class="signup-header">
+            <h1>REGISTER</h1>
+        </div>
+        <form id="signupForm">
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="customer" name="userType" value="customer" checked>
+                    <label for="customer">CUSTOMER</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="retailer" name="userType" value="retailer">
+                    <label for="retailer">RETAILER</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username" class="visually-hidden">Username</label>
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" name="username" placeholder="Username" required aria-describedby="usernameError">
+                <div class="error-message" id="usernameError" role="alert">Username must be at least 3 characters</div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="visually-hidden">Email address</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Email address" required aria-describedby="emailError">
+                <div class="error-message" id="emailError" role="alert">Please enter a valid email address</div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="visually-hidden">Password</label>
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Password" required aria-describedby="passwordError">
+                <i class="fas fa-eye password-toggle" id="passwordToggle"></i>
+                <div class="error-message" id="passwordError" role="alert">Password must be at least 6 characters</div>
+            </div>
+            <button type="submit" id="signupButton" class="sign-up-btn">SIGN UP</button>
+            <div class="login-prompt">
+                Already have an account? <a href="login.html" id="loginLink" class="login-link">Login</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

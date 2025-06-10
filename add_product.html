@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - SmartBuy</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .product-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h1 {
+            font-size: 24px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #F0C419;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .image-preview-container {
+            margin-top: 10px;
+            max-width: 200px;
+            display: none;
+        }
+
+        .image-preview-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .product-form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="product-form-container">
+        <a href="retailer.html" class="back-link">← Back to Dashboard</a>
+        <div class="form-header">
+            <h1>Add New Product</h1>
+        </div>
+        <form id="addProductForm" onsubmit="return false;">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="name" required>
+                <div class="error-message" id="nameError">Please enter a product name</div>
+            </div>
+            <div class="form-group">
+                <label for="productImage">Product Image</label>
+                <input type="file" id="productImage" name="image" accept="image/*" required>
+                <div class="error-message" id="imageError">Please select an image</div>
+                <div class="image-preview-container" id="imagePreview">
+                    <img id="previewImg" alt="Product preview">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Price (KSH)</label>
+                <input type="number" id="productPrice" name="price" step="0.01" min="0" required>
+                <div class="error-message" id="priceError">Please enter a valid price</div>
+            </div>
+            <div class="form-group">
+                <label for="productStatus">Status</label>
+                <select id="productStatus" name="status" required>
+                    <option value="">Select status</option>
+                    <option value="new">New</option>
+                    <option value="used">Used</option>
+                </select>
+                <div class="error-message" id="statusError">Please select a status</div>
+            </div>
+            <div class="form-group">
+                <label for="productBrand">Brand</label>
+                <select id="productBrand" name="brand" required>
+                    <option value="">Select brand</option>
+                    <option value="apple">Apple</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="dyson">Dyson</option>
+                    <option value="sony">Sony</option>
+                    <option value="lg">LG</option>
+                    <option value="panasonic">Panasonic</option>
+                    <option value="others">Others</option>
+                </select>
+                <div class="error-message" id="brandError">Please select a brand</div>
+            </div>
+            <div class="form-group">
+                <label for="productCategory">Category</label>
+                <select id="productCategory" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="mobile">Mobile Phones</option>
+                    <option value="tv">TV</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="camera">Camera</option>
+                    <option value="tablet">Tablet</option>
+                    <option value="watch">Watch</option>
+                    <option value="headphones">Headphones</option>
+                    <option value="keyboard">Keyboard</option>
+                    <option value="projector">Projector</option>
+                </select>
+                <div class="error-message" id="categoryError">Please select a category</div>
+            </div>
+            <div class="form-group">
+                <label for="productStock">Stock Quantity</label>
+                <input type="number" id="productStock" name="stock" min="0" required>
+                <div class="error-message" id="stockError">Please enter a valid stock quantity</div>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Add Product</button>
+        </form>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-analytics.js";
+        import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA98IdrETQBUz-Bmkusx0-dfoYSQZcb4y0",
+            authDomain: "project2-46d53.firebaseapp.com",
+            projectId: "project2-46d53",
+            storageBucket: "project2-46d53.appspot.com",
+            messagingSenderId: "547659515711",
+            appId: "1:547659515711:web:4f2aff7809406def61358a",
+            measurementId: "G-XBSG9VGDNG"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Check if user is authenticated and is a retailer
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                // If not logged in, redirect to login page
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Check if user is a retailer
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (!userDoc.exists() || userDoc.data().userType !== 'retailer') {
+                // If not a retailer, redirect to home page
+                window.location.href = 'index.html';
+                return;
+            }
+        });
+
+        // Add image preview functionality
+        document.getElementById('productImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    const previewImg = document.getElementById('previewImg');
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submission handler
+        const form = document.getElementById('addProductForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.log('Form submitted'); // Debug log
+            
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Adding Product...';
+            
+            try {
+                // Reset all error messages
+                document.querySelectorAll('.error-message').forEach(error => {
+                    error.style.display = 'none';
+                });
+
+                // Get current user
+                const user = auth.currentUser;
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Get form values
+                const productName = document.getElementById('productName').value.trim();
+                const productImage = document.getElementById('productImage').files[0];
+                const productPrice = document.getElementById('productPrice').value;
+                const productStatus = document.getElementById('productStatus').value;
+                const productBrand = document.getElementById('productBrand').value;
+                const productCategory = document.getElementById('productCategory').value;
+                const productStock = document.getElementById('productStock').value;
+
+                // Validate form
+                let isValid = true;
+
+                if (!productName) {
+                    document.getElementById('nameError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!productImage) {
+                    document.getElementById('imageError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!productPrice || productPrice <= 0) {
+                    document.getElementById('priceError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!productStatus) {
+                    document.getElementById('statusError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!productBrand) {
+                    document.getElementById('brandError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!productCategory) {
+                    document.getElementById('categoryError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!productStock || productStock < 0) {
+                    document.getElementById('stockError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Add Product';
+                    return;
+                }
+
+                // Convert image to base64
+                const reader = new FileReader();
+                reader.readAsDataURL(productImage);
+                reader.onload = async function() {
+                    try {
+                        const base64Image = reader.result;
+                        
+                        // Create product document in Firestore
+                        const productData = {
+                            name: productName,
+                            retailerId: user.uid,
+                            imageUrl: base64Image, // Store base64 image directly
+                            price: parseFloat(productPrice),
+                            status: productStatus,
+                            brand: productBrand,
+                            category: productCategory,
+                            stock: parseInt(productStock),
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString()
+                        };
+
+                        console.log('Adding product to Firestore...'); // Debug log
+                        // Add product to Firestore
+                        const productsCollection = collection(db, "products");
+                        await addDoc(productsCollection, productData);
+                        console.log('Product added successfully!'); // Debug log
+                        
+                        // Show success message
+                        alert('Product added successfully!');
+                        
+                        // Redirect to retailer dashboard
+                        window.location.href = 'retailer.html';
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error: ' + error.message);
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Add Product';
+                    }
+                };
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error: ' + error.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Add Product';
+            }
+        });
+    </script>
+</body>
+</html>
